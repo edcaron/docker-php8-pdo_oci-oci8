@@ -37,7 +37,8 @@ make install  && \
 echo "extension=pdo_oci.so" > /etc/php/7.3/mods-available/pdo_oci.ini  && \
 ln -s /etc/php/7.3/mods-available/pdo_oci.ini /etc/php/7.3/apache2/conf.d/pdo_oci.ini && \
 ln -s /etc/php/7.3/mods-available/pdo_oci.ini /etc/php/7.3/cli/conf.d/pdo_oci.ini && \ 
-sed -i 's/display_errors = Off/display_errors = On/g' /etc/php/7.3/apache2/php.ini
+sed -i 's/display_errors = Off/display_errors = On/g' /etc/php/7.3/apache2/php.ini && \ 
+service apache2 reload
 #RUN chmod -R 777 /var/www/html
 RUN ln -sf /dev/stderr /var/log/apache2/error.log
 RUN rm -rf /files_aux
