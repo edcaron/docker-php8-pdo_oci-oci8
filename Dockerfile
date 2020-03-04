@@ -1,5 +1,5 @@
 FROM ubuntu
-MAINTAINER rosemberg <rosemberg.al@gmail.com>, eduardo <eduardocaron10@gmail.com>, 
+MAINTAINER eduardo <eduardocaron10@gmail.com>
 ADD ./files /files_aux
 RUN export DEBIAN_FRONTEND=noninteractive && \
 apt-get update && \
@@ -7,7 +7,6 @@ apt-get install apache2 -y && \
 apt-get install software-properties-common -y && \
 add-apt-repository ppa:ondrej/php -y && \
 apt-get install -y tzdata && \
-apt-get install -y vim && \
 ln -sf /usr/share/zoneinfo/America/Fortaleza /etc/localtime   && \
 dpkg-reconfigure --frontend noninteractive tzdata  && \
 apt-get update && \
@@ -36,9 +35,12 @@ phpize  && \
 make install  && \
 echo "extension=pdo_oci.so" > /etc/php/7.3/mods-available/pdo_oci.ini  && \
 ln -s /etc/php/7.3/mods-available/pdo_oci.ini /etc/php/7.3/apache2/conf.d/pdo_oci.ini && \
-ln -s /etc/php/7.3/mods-available/pdo_oci.ini /etc/php/7.3/cli/conf.d/pdo_oci.ini && \ 
-sed -i 's/display_errors = Off/display_errors = On/g' /etc/php/7.3/apache2/php.ini && \ 
-service apache2 reload
+ln -s /etc/php/7.3/mods-available/pdo_oci.ini /etc/php/7.3/cli/conf.d/pdo_oci.ini
+
+RUN apt-get install -y php-xdebug
+RUN apt-get install -y vim
+RUN sed -i 's/display_errors = Off/display_errors = On/g' /etc/php/7.3/apache2/php.ini
+
 #RUN chmod -R 777 /var/www/html
 RUN ln -sf /dev/stderr /var/log/apache2/error.log
 RUN rm -rf /files_aux
