@@ -37,6 +37,12 @@ echo "extension=pdo_oci.so" > /etc/php/7.3/mods-available/pdo_oci.ini  && \
 ln -s /etc/php/7.3/mods-available/pdo_oci.ini /etc/php/7.3/apache2/conf.d/pdo_oci.ini && \
 ln -s /etc/php/7.3/mods-available/pdo_oci.ini /etc/php/7.3/cli/conf.d/pdo_oci.ini
 
+RUN apt-get install php-curl -y
+RUN apt install php-sqlite3 -y
+
+RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
+RUN a2enmod rewrite
+
 RUN apt-get install -y php-xdebug
 RUN apt-get install -y vim
 RUN sed -i 's/display_errors = Off/display_errors = On/g' /etc/php/7.3/apache2/php.ini
