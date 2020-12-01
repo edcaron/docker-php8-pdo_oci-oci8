@@ -38,7 +38,8 @@ ln -s /etc/php/7.3/mods-available/pdo_oci.ini /etc/php/7.3/apache2/conf.d/pdo_oc
 ln -s /etc/php/7.3/mods-available/pdo_oci.ini /etc/php/7.3/cli/conf.d/pdo_oci.ini
 
 RUN apt-get install php7.3-curl -y
-RUN apt install php-sqlite3 php7.3-sqlite -y
+RUN apt install php-sqlite3 -y
+RUN apt install php7.3-sqlite -y
 RUN apt install php-apcu php7.3-apcu -y
 
 RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
