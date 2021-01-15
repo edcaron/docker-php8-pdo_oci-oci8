@@ -52,6 +52,10 @@ RUN apt-get install -y php-xdebug
 RUN apt-get install -y vim
 RUN sed -i 's/display_errors = Off/display_errors = On/g' /etc/php/7.3/apache2/php.ini
 
+RUN pecl install mongodb
+
+RUN echo 'mongodb.so' >> /etc/php/7.3/apache2/php.ini
+
 #RUN chmod -R 777 /var/www/html
 RUN ln -sf /dev/stderr /var/log/apache2/error.log
 RUN rm -rf /files_aux
