@@ -1,15 +1,17 @@
 FROM ubuntu
 MAINTAINER eduardo <eduardocaron10@gmail.com>
 ADD ./files /files_aux
+
+RUN apt-get update --fix-missing
+
 RUN export DEBIAN_FRONTEND=noninteractive && \
-apt-get update && \
 apt-get install apache2 -y && \
 apt-get install software-properties-common -y && \
 add-apt-repository ppa:ondrej/php -y && \
 apt-get install -y tzdata && \
 ln -sf /usr/share/zoneinfo/America/Fortaleza /etc/localtime   && \
 dpkg-reconfigure --frontend noninteractive tzdata  && \
-apt-get update && \
+apt-get update --fix-missing && \
 apt-get install -y php7.3 php7.3-xml php7.3-cli php7.3-common php7.3-json php7.3-opcache php7.3-readline libapache2-mod-php7.3 php-pear php7.3-dev php7.3-pgsql php7.3-mysql && \
 apt-get install -y php7.3-bcmath php7.3-calendar php7.3-cgi  php7.3-ctype  php7.3-dom php7.3-exif php7.3-fileinfo php7.3-ftp php7.3-gettext php7.3-iconv php7.3-imap php7.3-mbstring php7.3-mysqli  && \
 apt-get install -y php7.3-mysqlnd php7.3-pdo php7.3-pdo-mysql php7.3-pdo-pgsql php7.3-phar php7.3-posix php7.3-shmop php7.3-simplexml php7.3-sockets php7.3-sysvmsg php7.3-sysvsem php7.3-sysvshm && \
