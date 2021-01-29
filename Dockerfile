@@ -54,6 +54,12 @@ RUN apt-get install -y php-xdebug
 RUN apt-get install -y vim
 RUN sed -i 's/display_errors = Off/display_errors = On/g' /etc/php/7.3/apache2/php.ini
 
+RUN echo 'xdebug.mode=debug' >> /etc/php/7.3/apache2/php.ini
+RUN echo 'xdebug.start_with_request=yes' >> /etc/php/7.3/apache2/php.ini
+RUN echo 'xdebug.client_port=9003' >> /etc/php/7.3/apache2/php.ini
+RUN echo 'xdebug.discover_client_host=true' >> /etc/php/7.3/apache2/php.ini
+
+
 RUN pecl install mongodb
 
 RUN echo 'extension=mongodb.so' >> /etc/php/7.3/apache2/php.ini
@@ -62,5 +68,5 @@ RUN echo 'extension=mongodb.so' >> /etc/php/7.3/apache2/php.ini
 RUN ln -sf /dev/stderr /var/log/apache2/error.log
 RUN rm -rf /files_aux
 WORKDIR /var/www/html/
-EXPOSE 80
+EXPOSE 80 9003
 CMD apachectl -D FOREGROUND
