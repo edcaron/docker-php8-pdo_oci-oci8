@@ -54,10 +54,7 @@ RUN apt-get install -y php-xdebug
 RUN apt-get install -y vim
 RUN sed -i 's/display_errors = Off/display_errors = On/g' /etc/php/7.3/apache2/php.ini
 
-RUN echo 'xdebug.mode=debug,develop' >> /etc/php/7.3/apache2/php.ini
-RUN echo 'xdebug.start_with_request=yes' >> /etc/php/7.3/apache2/php.ini
-RUN echo 'xdebug.client_port=9003' >> /etc/php/7.3/apache2/php.ini
-RUN echo 'xdebug.discover_client_host=true' >> /etc/php/7.3/apache2/php.ini
+RUN echo -en "\n\nxdebug.mode=debug,develop \nxdebug.remote_handler=dbgp \nxdebug.start_with_request=yes \nxdebug.client_port=9003 \nxdebug.discover_client_host=yes \nxdebug.idekey=docker \n#xdebug.log=/var/www/html/xdebug.log \n#xdebug.log_level=10 \n#xdebug.client_host=host.docker.internal" >> /etc/php/7.3/apache2/php.ini
 
 
 RUN pecl install mongodb
