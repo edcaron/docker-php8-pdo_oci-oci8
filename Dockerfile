@@ -60,6 +60,8 @@ RUN echo -en "\n\nxdebug.mode=debug,develop \nxdebug.remote_handler=dbgp \nxdebu
 RUN pecl install mongodb
 
 RUN echo 'extension=mongodb.so' >> /etc/php/7.3/apache2/php.ini
+RUN echo 'extension=mongodb.so' >> /etc/php/7.3/mods-available/mongodb.ini
+RUN phpenmod mongodb
 
 #RUN chmod -R 777 /var/www/html
 RUN ln -sf /dev/stderr /var/log/apache2/error.log
