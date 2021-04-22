@@ -45,8 +45,6 @@ RUN apt-get install php7.3-sqlite3 -y
 RUN apt-get install php-apcu php7.3-apcu -y
 RUN apt-get install php7.3-gd -y
 
-RUN apt-get install libzmq3-dev
-
 RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
 RUN a2enmod rewrite
 
