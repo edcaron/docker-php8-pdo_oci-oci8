@@ -54,8 +54,11 @@ RUN apt-get install -y php7.3-xdebug
 RUN apt-get install -y vim
 RUN sed -i 's/display_errors = Off/display_errors = On/g' /etc/php/7.3/apache2/php.ini
 
-RUN echo -e -n "\n\nxdebug.mode=debug,develop,coverage \nxdebug.remote_handler=dbgp \nxdebug.start_with_request=yes \nxdebug.client_port=9003 \nxdebug.discover_client_host=yes \nxdebug.idekey=docker \n#xdebug.log=/var/www/html/xdebug.log \n#xdebug.log_level=10 \n#xdebug.client_host=host.docker.internal" >> /etc/php/7.3/apache2/php.ini
+#xdebug setting for apache
+RUN echo -e -n "\n\nxdebug.mode=debug,develop \nxdebug.remote_handler=dbgp \nxdebug.start_with_request=yes \nxdebug.client_port=9003 \nxdebug.discover_client_host=yes \nxdebug.idekey=docker \n#xdebug.log=/var/www/html/xdebug.log \n#xdebug.log_level=10 \n#xdebug.client_host=host.docker.internal" >> /etc/php/7.3/apache2/php.ini
 
+#xdebug setting for cli
+RUN echo -e -n "\n\nxdebug.mode=debug,develop,coverage \nxdebug.remote_handler=dbgp \nxdebug.start_with_request=yes \nxdebug.client_port=9003 \nxdebug.discover_client_host=yes \nxdebug.idekey=docker \n#xdebug.log=/var/www/html/xdebug.log \n#xdebug.log_level=10 \n#xdebug.client_host=host.docker.internal" >> /etc/php/7.3/apache2/php.ini
 
 RUN pecl install mongodb
 
