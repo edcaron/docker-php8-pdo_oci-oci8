@@ -15,7 +15,7 @@ apt-get update --fix-missing && \
 apt-get install -y php7.3 php7.3-xml php7.3-cli php7.3-common php7.3-json php7.3-opcache php7.3-readline libapache2-mod-php7.3 php-pear php7.3-dev php7.3-pgsql php7.3-mysql && \
 apt-get install -y php7.3-bcmath php7.3-calendar php7.3-cgi  php7.3-ctype  php7.3-dom php7.3-exif php7.3-fileinfo php7.3-ftp php7.3-gettext php7.3-iconv php7.3-imap php7.3-mbstring php7.3-mysqli  && \
 apt-get install -y php7.3-mysqlnd php7.3-pdo php7.3-pdo-mysql php7.3-pdo-pgsql php7.3-phar php7.3-posix php7.3-shmop php7.3-simplexml php7.3-sockets php7.3-sysvmsg php7.3-sysvsem php7.3-sysvshm && \
-apt-get install -y php7.3-tokenizer php7.3-wddx php7.3-xmlreader php7.3-xmlwriter php7.3-xsl php7.3-zip composer && \
+apt-get install -y php7.3-tokenizer php7.3-wddx php7.3-xmlreader php7.3-xmlwriter php7.3-xsl php7.3-zip && \
 apt-get install -y libaio1  && \
 apt-get install -y alien && \
 alien -i /files_aux/oracle-instantclient11.2-basic-11.2.0.4.0-1.x86_64.rpm  && \
@@ -44,6 +44,8 @@ RUN apt-get install php-sqlite3 -y
 RUN apt-get install php7.3-sqlite3 -y
 RUN apt-get install php-apcu php7.3-apcu -y
 RUN apt-get install php7.3-gd -y
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
 RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
 RUN a2enmod rewrite
